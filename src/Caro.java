@@ -77,8 +77,8 @@ public class Caro extends JFrame implements ActionListener{
 	private void newGame() {
 		int response = JOptionPane.showConfirmDialog(null, "do you want to play another game?", "Caro", JOptionPane.YES_NO_OPTION);
 		if(response == JOptionPane.YES_OPTION) {
-			new Caro();
 			this.dispose();
+			new Caro();
 		} else {
 			System.exit(0);
 		}
