@@ -1,3 +1,4 @@
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -10,6 +11,8 @@ public class Caro extends JFrame implements ActionListener{
 
 	JButton[][] buttons = new JButton[3][3];
 	int mark = 1;
+	ImageIcon Oicon = new ImageIcon(new ImageIcon("O.png").getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH));
+	ImageIcon Xicon = new ImageIcon(new ImageIcon("X.png").getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH));
 
 	Caro() {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -86,19 +89,20 @@ public class Caro extends JFrame implements ActionListener{
 		String x = mark == 1 ? "X" : "O";
 		for(int i = 0; i < 3; i++) {
 			for(int j = 0; j < 3; j++) {
-				mark *= -1;
 				if(e.getSource() == buttons[i][j]) {
 					if(hasValue(i, j)) return;
 					buttons[i][j].setText(x);
 					if(checkWin(i,j,x) == true) {
-						JOptionPane.showMessageDialog(this, x + " WIN");
+						ImageIcon icon = x == "X" ? Xicon : Oicon;
+						JOptionPane.showMessageDialog(null, x + " WIN", "notification", JOptionPane.INFORMATION_MESSAGE, icon);
 						newGame();
 					}
 					else if(isDraw()) {
-						JOptionPane.showMessageDialog(null, "DRAW");
+						JOptionPane.showMessageDialog(null, "DRAW", "notification", JOptionPane.INFORMATION_MESSAGE);
 						newGame();
 					}
 				}
+				mark *= -1;
 			}
 		}
 	}
